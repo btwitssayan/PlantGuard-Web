@@ -83,7 +83,7 @@
             <p>Upload a photo of your plant to get instant disease detection results</p>
         </div>
         <div class="upload-container">
-            <form id="upload-form" action="/detect" method="POST" enctype="multipart/form-data">
+            <form id="upload-form" action="/" method="POST" enctype="multipart/form-data">
                 <div class="upload-box">
                     <i class="fas fa-cloud-upload-alt"></i>
                     <p>Drag and drop your file here or</p>
@@ -93,8 +93,8 @@
                             <i class="fas fa-camera"></i> Take Photo
                         </button>
                     </div>
-                    <input type="file" id="file-upload" name="file" accept="image/*" hidden>
-                    <p class="file-info">PNG, JPG, GIF up to 10MB</p>
+                    <input type="file" id="file-upload" name="file" accept=".jpg, .jpeg, .png, .gif" hidden>
+                    <p class="file-info">PNG, JPG, JPEG, GIF up to 5MB</p>
                 </div>
                 <div id="preview" class="preview-container" hidden>
                     <img id="preview-image" src="" alt="Preview">
@@ -108,10 +108,11 @@
                         <i class="fas fa-times"></i> Cancel
                     </button>
                 </div>
+                <p id="error-message" class="error-message" hidden></p>
                 <button type="submit" class="submit-btn">Detect Disease</button>
             </form>
     
-            {% if prediction %}
+            {% if prediction and prediction != 'Unknown' %}
             <div class="result-container" id="prediction-section">
                 <div class="result-header">
                     <i class="fas fa-leaf"></i>
@@ -121,6 +122,8 @@
                     <p class="disease-name">{{ prediction }}</p>
                 </div>
             </div>
+            {% elif prediction == 'Unknown' %}
+            <p id="error-message" id="prediction-section" class="error-message">Please upload a picture of your plant leaf</p>
             {% endif %}
         </div>
     </section>

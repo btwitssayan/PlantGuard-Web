@@ -19,20 +19,21 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
-
-@app.route('/detect', methods=['POST', 'GET'])
-def upload_file():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file uploaded'}), 400
-    file = request.files['file']
-    if file and allowed_file(file.filename):
+    if request.method == 'POST':
+        file = request.files['file']
         result = detect(file)
         return render_template('index.html', prediction=result)
-    else:
-        return jsonify({'error': 'File type not allowed'}), 400
+    return render_template('index.html')
+
+# @app.route('/detect', methods=['POST', 'GET'])
+# def upload_file():
+#     if request.method == 'POST':
+#         file = request.files['file']
+#         result = detect(file)
+#         return render_template('index.html', prediction=result)
+#     return render_template('index.html', prediction=None)
 
 @app.route('/developers')
 def developers():

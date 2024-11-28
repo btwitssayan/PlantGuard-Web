@@ -864,3 +864,37 @@ footer {
         max-width: 400px;
     }
 }
+
+
+/* Base styles for the error message */
+#error-message {
+    color: #ff0000; /* Text color */ /* Red background to indicate an error */
+    border-radius: 2px; /* Rounded corners */
+    padding: 10px 15px; /* Space inside the box */
+    font-size: 14px; /* Adjust text size */
+    font-family: Arial, sans-serif; /* Default font family */
+    max-width: 400px; /* Limit the width */
+    margin: 10px auto; /* Center it with automatic margins */
+    text-align: center; /* Center-align the text */
+}
+
+/* When the error message is shown */
+#error-message:not([hidden]) {
+    display: block; /* Ensure visibility */
+    animation: fadeIn 0.5s ease-in-out; /* Smooth fade-in animation */
+}
+
+/* Hidden state */
+#error-message[hidden] {
+    display: none; /* Completely hide the element */
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

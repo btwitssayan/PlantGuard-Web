@@ -179,3 +179,39 @@ uploadBox.addEventListener('drop', (e) => {
         fileUpload.files = e.dataTransfer.files;
     }
 });
+
+// Handle form submission
+document.getElementById('upload-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const fileInput = document.getElementById("file-upload");
+    const errorMessage = document.getElementById("error-message");
+    const allowedExtensions = ["png", "jpg", "jpeg", "gif"]; // Allowed file extensions
+    const maxSize = 5 * 1024 * 1024; // 2 MB max size
+
+    // Reset error message
+    errorMessage.textContent = "";
+
+    if (!fileInput.files.length) {
+        errorMessage.hidden = false;
+        errorMessage.textContent = "No file selected. Please upload a file.";
+        return;
+    }
+
+    const file = fileInput.files[0];
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+
+    // Validate file type
+    if (!allowedExtensions.includes(fileExtension)) {
+        errorMessage.hidden = false;
+        errorMessage.textContent = "Invalid file type. Please upload an image file (png, jpg, jpeg, gif).";
+        return;
+    }
+
+    // Validate file size
+    if (file.size > maxSize) {
+        errorMessage.hidden = false;
+        errorMessage.textContent = `File size exceeds 2 MB. Your file size: ${(file.size / (1024 * 1024)).toFixed(2)} MB.`;
+        return;
+    }
+    this.submit();
+});
