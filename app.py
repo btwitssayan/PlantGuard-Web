@@ -31,15 +31,8 @@ def index():
 def developers():
     return render_template('developers.html')
 
-@app.route('/contact', methods=['GET', 'POST'])
+@app.route('/contact')
 def contact():
-    if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        message = request.form['message']
-        # Process the form data here
-        # For example, you can save it to a database or send an email
-        return render_template('contact.html', success=True)
     return render_template('contact.html')  
 
 @app.route('/terms')

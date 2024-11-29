@@ -241,3 +241,43 @@ document.getElementById('upload-form').addEventListener('submit', function(e) {
         errorMessage.textContent = "";
     }
 });
+
+
+function handleContactFormSubmission(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    const contactSection = document.querySelector('.contact-section');
+    
+    // Create thank you message
+    const thankYouMessage = document.createElement('div');
+    thankYouMessage.className = 'thank-you-message';
+    thankYouMessage.innerHTML = `
+        <div class="thank-you-content">
+            <i class="fas fa-check-circle"></i>
+            <h2>Thank You!</h2>
+            <p>Your message has been sent successfully. We'll get back to you soon.</p>
+            <button onclick="resetForm()" class="reset-btn">Send Another Message</button>
+        </div>
+    `;
+    
+    // Hide the form container and show thank you message
+    const contactContainer = document.querySelector('.contact-container');
+    contactContainer.style.display = 'none';
+    contactSection.appendChild(thankYouMessage);
+    
+    // Reset the form
+    form.reset();
+}
+
+function resetForm() {
+    const thankYouMessage = document.querySelector('.thank-you-message');
+    const contactContainer = document.querySelector('.contact-container');
+    
+    // Remove thank you message and show form
+    if (thankYouMessage) {
+        thankYouMessage.remove();
+    }
+    contactContainer.style.display = 'grid';
+}
