@@ -39,3 +39,6 @@ def contact():
 def terms():
     return jsonify({'error':'Kaya karega Terms or Conditions Dak k BKL' }), 400
 
+if __name__ == '__main__':
+    app.run(debug=True)
+
