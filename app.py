@@ -35,8 +35,5 @@ def developers():
 def contact():
     return render_template('contact.html')  
 
-@app.route('/terms')
-def terms():
-    return jsonify({'error':'Kaya karega Terms or Conditions Dak k BKL' }), 400
 
 
