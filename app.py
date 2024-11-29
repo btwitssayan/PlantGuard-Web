@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, redirect
 import requests
 import json
 
@@ -29,6 +29,9 @@ def index():
         return render_template('index.html', prediction=result)
     return render_template('index.html')
 
+@app.route('/whatsapp')
+def whatsapp():
+    return redirect('https://wa.me/+1(415)523-8886?text=join%20street-silent')
 @app.route('/developers')
 def developers():
     return render_template('developers.html')
