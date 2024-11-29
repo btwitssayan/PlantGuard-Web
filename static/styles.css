@@ -344,8 +344,6 @@ nav {
 
 .preview-container {
     margin: 1rem 0;
-    justify-content: center;
-    align-items: center;
 }
 
 .preview-container img {
@@ -446,13 +444,6 @@ footer {
 
 .footer-links a:hover {
     color: var(--primary-color);
-}
-
-.footer-bottom {
-    text-align: center;
-    color: var(--text-light);
-    padding-top: 2rem;
-    border-top: 1px solid #e5e7eb;
 }
 
 /* Responsive Design */

@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-document.getElementById('year').textContent = new Date().getFullYear();
         
 // Get DOM elements
 const fileUpload = document.getElementById('file-upload');
@@ -90,6 +89,9 @@ function handleFilePreview(file) {
         reader.onload = function(e) {
             previewImage.src = e.target.result;
             previewContainer.hidden = false;
+            previewContainer.style.display = 'flex';
+            previewContainer.style.justifyContent = 'center';
+            previewContainer.style.alignItems = 'center';
             cameraContainer.hidden = true;
         }
         reader.readAsDataURL(file);
@@ -110,6 +112,7 @@ async function startCamera() {
         });
         cameraPreview.srcObject = stream;
         previewContainer.hidden = true;
+        previewContainer.removeAttribute('style');
         cameraContainer.hidden = false;
     } catch (err) {
         alert('Unable to access camera: ' + err.message);
