@@ -21,6 +21,8 @@ def allowed_file(filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    if 'file' not in request.files:
+        return render_template('index.html')
     if request.method == 'POST':
         file = request.files['file']
         result = detect(file)
