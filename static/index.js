@@ -180,13 +180,16 @@ uploadBox.addEventListener('drop', (e) => {
     }
 });
 
+
+const fileInput = document.getElementById("file-upload");
+const errorMessage = document.getElementById("error-message");
+const allowedExtensions = ["png", "jpg", "jpeg", "gif"]; // Allowed file extensions
+const maxSize = 5 * 1024 * 1024; // 2 MB max size
+
 // Handle form submission
 document.getElementById('upload-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    const fileInput = document.getElementById("file-upload");
-    const errorMessage = document.getElementById("error-message");
-    const allowedExtensions = ["png", "jpg", "jpeg", "gif"]; // Allowed file extensions
-    const maxSize = 5 * 1024 * 1024; // 2 MB max size
+
 
     // Reset error message
     errorMessage.textContent = "";
@@ -214,4 +217,27 @@ document.getElementById('upload-form').addEventListener('submit', function(e) {
         return;
     }
     this.submit();
+});
+
+ // Event listener for file selection
+ fileInput.addEventListener("change", function () {
+    if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const fileExtension = file.name.split(".").pop().toLowerCase();
+
+        // Validate file type
+        if (!allowedExtensions.includes(fileExtension)) {
+            errorMessage.textContent = "Invalid file type. Please upload an image file (png, jpg, jpeg, gif).";
+            return;
+        }
+
+        // Validate file size
+        if (file.size > maxSize) {
+            errorMessage.textContent = `File size exceeds 2 MB. Your file size: ${(file.size / (1024 * 1024)).toFixed(2)} MB.`;
+            return;
+        }
+
+        // Clear error message if file is valid
+        errorMessage.textContent = "";
+    }
 });

@@ -27,14 +27,6 @@ def index():
         return render_template('index.html', prediction=result)
     return render_template('index.html')
 
-# @app.route('/detect', methods=['POST', 'GET'])
-# def upload_file():
-#     if request.method == 'POST':
-#         file = request.files['file']
-#         result = detect(file)
-#         return render_template('index.html', prediction=result)
-#     return render_template('index.html', prediction=None)
-
 @app.route('/developers')
 def developers():
     return render_template('developers.html')
@@ -53,5 +45,4 @@ def contact():
 @app.route('/terms')
 def terms():
     return jsonify({'error':'Kaya karega Terms or Conditions Dak k BKL' }), 400
-
 
